@@ -1,6 +1,9 @@
 :root {
-  --ink: #161616;
-  --ink-deep: #0d0d0d;
+  --ink: #2a2420;
+  --accent: #f26b1f;
+  --accent-deep: #d9560b;
+  --accent-soft: #fff3ea;
+  --accent-line: rgba(255, 255, 255, 0.45);
   --text: #444;
   --text-sub: #555;
   --muted: #777;
@@ -8,8 +11,8 @@
   --line: #e2e2e2;
   --line-strong: #ddd;
   --bg: #fff;
-  --bg-sub: #f4f4f4;
-  --num: #c4c4c4;
+  --bg-sub: var(--accent-soft);
+  --num: #f9b98f;
 
   --font-ja: 'Zen Kaku Gothic New', sans-serif;
   --font-en: 'Barlow', sans-serif;
@@ -73,7 +76,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -87,7 +90,7 @@ button {
 .eyebrow {
   font: 600 13px var(--font-en);
   letter-spacing: 0.3em;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 14px;
 }
 

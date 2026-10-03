@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Wave from '../components/Wave.astro';
 import { services } from '../data/site';
 
 // トップのメインビジュアル。public/ に画像を置いてパスを入れると表示されます
@@ -14,12 +15,13 @@ const links = [
 
 <BaseLayout>
   <section class="hero" style={heroImage ? `background-image: url(${heroImage})` : undefined}>
-    {!heroImage && <span class="hero-note">HERO — 建築の外壁・ガラス・コンクリート質感（モノクロ 2560×1360）</span>}
+    {!heroImage && <span class="hero-note">HERO — メインビジュアル写真（2560×1360）</span>}
     <div class="hero-text">
       <div class="hero-eyebrow">BUILDING SYSTEMS THAT LAST</div>
       <h1>長く使える仕組みを、<br />確かな技術で。</h1>
       <p>Webアプリケーション・業務システムの受託開発と、インフラ／クラウド構築。</p>
     </div>
+    <Wave color="var(--accent)" />
   </section>
 
   <section class="services container">
@@ -44,6 +46,7 @@ const links = [
         ))
       }
     </ol>
+    <Wave color="#fff" flip />
   </section>
 
   <nav class="links" aria-label="各ページへのリンク">
@@ -93,7 +96,7 @@ const links = [
     z-index: 1;
     left: var(--gutter);
     right: var(--gutter);
-    bottom: 80px;
+    bottom: clamp(96px, 12vw, 160px);
     color: #fff;
   }
 
@@ -119,7 +122,14 @@ const links = [
   }
 
   .services {
-    padding-block: 120px 104px;
+    position: relative;
+    padding-block: 96px clamp(140px, 14vw, 200px);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .services .eyebrow {
+    color: #fff;
   }
 
   .services-head {
@@ -138,15 +148,15 @@ const links = [
   .services-head p {
     max-width: 640px;
     font-size: 15px;
+    font-weight: 500;
     line-height: 2;
-    color: var(--text);
   }
 
   .service-list {
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid #fff;
   }
 
   .service {
@@ -155,13 +165,13 @@ const links = [
     gap: 32px;
     align-items: center;
     padding: 40px 0;
-    border-bottom: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--accent-line);
   }
 
   .service-num {
     font-size: 44px;
     font-weight: 600;
-    color: var(--num);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .service h3 {
@@ -174,19 +184,19 @@ const links = [
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: var(--muted-2);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .service p {
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.9;
-    color: var(--text);
   }
 
   .links {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-block: 1px solid var(--line);
+    padding-block: 24px 48px;
   }
 
   .link-card {
@@ -194,6 +204,12 @@ const links = [
     flex-direction: column;
     gap: 20px;
     padding: 56px var(--gutter);
+    transition: background 0.2s;
+  }
+
+  .link-card:hover {
+    opacity: 1;
+    background: var(--accent-soft);
   }
 
   .link-card + .link-card {
@@ -216,6 +232,7 @@ const links = [
   .link-title span:last-child {
     font-size: 20px;
     font-weight: 400;
+    color: var(--accent);
   }
 
   .link-card p {
@@ -263,7 +280,7 @@ const links = [
     }
 
     .hero-text {
-      bottom: 48px;
+      bottom: 80px;
     }
 
     .hero-eyebrow {
@@ -276,7 +293,7 @@ const links = [
     }
 
     .services {
-      padding-block: 80px 72px;
+      padding-block: 64px 112px;
     }
 
     .services-head {

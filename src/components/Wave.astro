@@ -1,0 +1,52 @@
+---
+// セクションの上端・下端を波の形にする飾り。
+// 親要素に position: relative が必要です。
+// color には「隣のセクションの色」を指定します（波の部分がその色で塗られます）。
+interface Props {
+  color: string;
+  position?: 'top' | 'bottom';
+  // 左右反転（同じページで波の形が続くのを避けるため）
+  flip?: boolean;
+}
+
+const { color, position = 'bottom', flip = false } = Astro.props;
+---
+
+<svg
+  class:list={['wave', position, { flip }]}
+  viewBox="0 0 1440 120"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  style={`fill: ${color}`}
+>
+  <path d="M0,70 C180,118 360,118 560,72 C760,26 900,6 1080,40 C1230,68 1340,96 1440,78 L1440,120 L0,120 Z"></path>
+</svg>
+
+<style>
+  .wave {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: clamp(36px, 6vw, 96px);
+    pointer-events: none;
+  }
+
+  .bottom {
+    bottom: -1px;
+  }
+
+  .top {
+    top: -1px;
+    transform: scaleY(-1);
+  }
+
+  .bottom.flip {
+    transform: scaleX(-1);
+  }
+
+  .top.flip {
+    transform: scale(-1, -1);
+  }
+</style>

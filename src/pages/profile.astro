@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import Wave from '../components/Wave.astro';
 import { career, company, skills } from '../data/site';
 
 // 代表者の写真。public/ に画像を置いてパスを入れると表示されます
 const portrait: string | undefined = undefined;
 ---
 
-<BaseLayout title="代表者について" description="合同会社Fujita-create 代表社員の経歴と得意分野をご紹介します。">
-  <PageHero title="代表者について" en="PROFILE" note="PAGE VISUAL — 光と影（モノクロ 2560×720）" />
+<BaseLayout ctaWaveColor="var(--accent-soft)" title="代表者について" description="合同会社Fujita-create 代表社員の経歴と得意分野をご紹介します。">
+  <PageHero title="代表者について" en="PROFILE" note="PAGE VISUAL — 光と影（2560×720）" />
 
   <section class="split container intro">
     {
@@ -32,6 +33,7 @@ const portrait: string | undefined = undefined;
   </section>
 
   <section class="career-section container">
+    <Wave color="#fff" position="top" />
     <div class="split">
       <div>
         <div class="eyebrow">CAREER</div>
@@ -118,13 +120,14 @@ const portrait: string | undefined = undefined;
   }
 
   .career-section {
-    padding-block: 104px;
+    position: relative;
+    padding-block: clamp(120px, 14vw, 180px) 104px;
     background: var(--bg-sub);
   }
 
   .career {
     background: #fff;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--accent);
   }
 
   .career-row {

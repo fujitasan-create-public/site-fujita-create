@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Wave from '../../components/Wave.astro';
 import { company, contactFormEndpoint } from '../../data/site';
 
 const topics = ['開発のご相談', 'お見積り', 'その他'];
@@ -10,6 +11,7 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
     <div class="eyebrow">CONTACT</div>
     <h1>お問い合わせ</h1>
     <p>開発のご相談・お見積りは、以下のフォームからご連絡ください。2営業日以内にご返信します。</p>
+    <Wave color="#fff" />
   </div>
   <nav class="breadcrumb container" aria-label="パンくずリスト">
     <a href="/">トップ</a>
@@ -102,13 +104,14 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
 
 <style>
   .head {
-    padding-block: 96px 72px;
-    background: var(--ink);
+    position: relative;
+    padding-block: 96px clamp(96px, 11vw, 150px);
+    background: var(--accent);
     color: #fff;
   }
 
   .head .eyebrow {
-    color: #999;
+    color: #fff;
     letter-spacing: 0.32em;
     margin-bottom: 16px;
   }
@@ -121,8 +124,8 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
 
   .head p {
     font-size: 15px;
+    font-weight: 500;
     line-height: 2;
-    color: #bbb;
   }
 
   .breadcrumb {
@@ -131,7 +134,6 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
     padding-block: 20px;
     font-size: 12px;
     color: var(--muted);
-    border-bottom: 1px solid var(--line);
   }
 
   [aria-current='page'] {
@@ -157,7 +159,7 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
   .form {
     display: flex;
     flex-direction: column;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--accent);
   }
 
   .row {
@@ -176,7 +178,7 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
   .req {
     margin-left: 6px;
     padding: 2px 6px;
-    background: var(--ink);
+    background: var(--accent);
     color: #fff;
     font-size: 11px;
     white-space: nowrap;
@@ -249,10 +251,11 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
   .submit {
     padding: 22px clamp(40px, 8vw, 96px);
     border: 0;
-    background: var(--ink);
+    border-radius: 999px;
+    background: var(--accent);
     color: #fff;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
   }
 
@@ -263,7 +266,7 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
 
   @media (max-width: 600px) {
     .head {
-      padding-block: 64px 48px;
+      padding-block: 64px 80px;
     }
 
     h1 {

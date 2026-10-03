@@ -11,12 +11,15 @@ interface Props {
   description?: string;
   // お問い合わせページでは下部の CTA を出さない
   showCta?: boolean;
+  // CTA 上端の波の色（CTA の直前のセクションの背景色に合わせる）
+  ctaWaveColor?: string;
 }
 
 const {
   title,
   description = 'Webアプリケーション・業務システムの受託開発と、インフラ／クラウド構築。合同会社Fujita-createのコーポレートサイトです。',
   showCta = true,
+  ctaWaveColor,
 } = Astro.props;
 
 const pageTitle = title ? `${title}｜${company.name}` : `${company.name}｜長く使える仕組みを、確かな技術で。`;
@@ -52,7 +55,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main>
       <slot />
     </main>
-    {showCta && <ContactCta />}
-    <Footer />
+    {showCta && <ContactCta waveColor={ctaWaveColor} />}
+    <Footer wave={!showCta} />
   </body>
 </html>

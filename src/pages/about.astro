@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import Wave from '../components/Wave.astro';
 import { services, values } from '../data/site';
 ---
 
 <BaseLayout title="会社概要" description="合同会社Fujita-createが大切にしていること、事業への想いと事業内容をご紹介します。">
-  <PageHero title="会社概要" en="ABOUT" note="PAGE VISUAL — 建築の細部（モノクロ 2560×720）" />
+  <PageHero title="会社概要" en="ABOUT" note="PAGE VISUAL — 建築の細部（2560×720）" />
 
   <section class="split container philosophy">
     <div>
@@ -30,6 +31,7 @@ import { services, values } from '../data/site';
   </section>
 
   <section class="values-section container">
+    <Wave color="#fff" position="top" />
     <div class="split">
       <div>
         <div class="eyebrow">VALUES</div>
@@ -47,6 +49,7 @@ import { services, values } from '../data/site';
         }
       </ol>
     </div>
+    <Wave color="#fff" flip />
   </section>
 
   <section class="split container business">
@@ -91,7 +94,8 @@ import { services, values } from '../data/site';
   }
 
   .values-section {
-    padding-block: 104px;
+    position: relative;
+    padding-block: clamp(120px, 14vw, 180px);
     background: var(--bg-sub);
   }
 
@@ -107,7 +111,7 @@ import { services, values } from '../data/site';
   .value {
     padding: 36px 32px;
     background: #fff;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--accent);
   }
 
   .value-num {
@@ -137,7 +141,7 @@ import { services, values } from '../data/site';
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--accent);
   }
 
   .business-list li {

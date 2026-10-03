@@ -1,8 +1,17 @@
 ---
+import Wave from './Wave.astro';
 import { company, companyInfo, nav } from '../data/site';
+
+interface Props {
+  // 直前に CTA がないページでは、フッター上端を波にする
+  wave?: boolean;
+}
+
+const { wave = false } = Astro.props;
 ---
 
-<footer class="footer container">
+<footer class:list={['footer container', { 'has-wave': wave }]}>
+  {wave && <Wave color="#fff" position="top" flip />}
   <div class="footer-main">
     <div class="footer-brand">
       <a href="/" class="brand">
@@ -36,9 +45,14 @@ import { company, companyInfo, nav } from '../data/site';
 
 <style>
   .footer {
-    background: var(--ink-deep);
-    color: #ccc;
+    background: var(--accent);
+    color: #fff;
     padding-block: 72px 32px;
+  }
+
+  .has-wave {
+    position: relative;
+    padding-top: clamp(110px, 12vw, 170px);
   }
 
   .footer-main {
@@ -46,7 +60,7 @@ import { company, companyInfo, nav } from '../data/site';
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     gap: var(--split-gap);
     padding-bottom: 56px;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid var(--accent-line);
   }
 
   .footer-brand {
@@ -82,7 +96,7 @@ import { company, companyInfo, nav } from '../data/site';
   .brand-en {
     font: 600 10px var(--font-en);
     letter-spacing: 0.22em;
-    color: var(--muted-2);
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .footer-nav {
@@ -106,15 +120,15 @@ import { company, companyInfo, nav } from '../data/site';
     grid-template-columns: 5.5em minmax(0, 1fr);
     column-gap: 24px;
     padding: 12px 0;
-    border-top: 1px solid #2a2a2a;
+    border-top: 1px solid var(--accent-line);
   }
 
   .info-row:nth-last-child(-n + 2) {
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid var(--accent-line);
   }
 
   dt {
-    color: var(--muted-2);
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .footer-bottom {
@@ -123,7 +137,7 @@ import { company, companyInfo, nav } from '../data/site';
     gap: 16px;
     padding-top: 24px;
     font-size: 12px;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .footer-bottom small {

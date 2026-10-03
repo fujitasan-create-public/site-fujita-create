@@ -11,7 +11,7 @@ const filters = [
 ---
 
 <BaseLayout title="プロダクト事例" description="法人のお客様からご依頼いただいた開発と、個人として企画・開発したプロダクトをご紹介します。">
-  <PageHero title="プロダクト事例" en="PRODUCTS" note="PAGE VISUAL — 質感（モノクロ 2560×720）" />
+  <PageHero title="プロダクト事例" en="PRODUCTS" note="PAGE VISUAL — 質感（2560×720）" />
 
   <section class="container products">
     <div class="products-head">
@@ -89,7 +89,7 @@ const filters = [
   .filters {
     display: flex;
     flex: none;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--accent);
   }
 
   .filter {
@@ -102,7 +102,7 @@ const filters = [
   }
 
   .filter[aria-pressed='true'] {
-    background: var(--ink);
+    background: var(--accent);
     color: #fff;
   }
 
@@ -113,7 +113,7 @@ const filters = [
     margin: 0;
     padding: 40px 0 0;
     list-style: none;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--accent);
   }
 
   .card {
@@ -141,7 +141,7 @@ const filters = [
 
   .kind {
     padding: 3px 10px;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--accent);
   }
 
   .cat {
