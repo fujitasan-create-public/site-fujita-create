@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactCta from '../components/ContactCta.astro';
+import { company } from '../data/site';
+
+interface Props {
+  // 未指定ならトップページ扱い（会社名のみ）
+  title?: string;
+  description?: string;
+  // お問い合わせページでは下部の CTA を出さない
+  showCta?: boolean;
+}
+
+const {
+  title,
+  description = 'Webアプリケーション・業務システムの受託開発と、インフラ／クラウド構築。合同会社Fujita-createのコーポレートサイトです。',
+  showCta = true,
+} = Astro.props;
+
+const pageTitle = title ? `${title}｜${company.name}` : `${company.name}｜長く使える仕組みを、確かな技術で。`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content={title ? 'article' : 'website'} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={company.name} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&family=JetBrains+Mono&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    {showCta && <ContactCta />}
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<section class="cta container">
+  <div>
+    <div class="eyebrow">CONTACT</div>
+    <p class="cta-title">開発のご相談・お見積り</p>
+  </div>
+  <a href="/contact/" class="cta-button">お問い合わせフォーム →</a>
+</section>
+
+<style>
+  .cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    padding-block: 72px;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .eyebrow {
+    color: #999;
+    margin-bottom: 12px;
+  }
+
+  .cta-title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .cta-button {
+    flex: none;
+    padding: 22px 56px;
+    border: 1px solid #fff;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 700px) {
+    .cta {
+      flex-direction: column;
+      align-items: stretch;
+      padding-block: 56px;
+    }
+
+    .cta-title {
+      font-size: 24px;
+    }
+
+    .cta-button {
+      text-align: center;
+      padding: 20px 24px;
+    }
+  }
+</style>

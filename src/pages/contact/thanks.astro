@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="送信しました" showCta={false}>
+  <section class="thanks container">
+    <h1>送信しました</h1>
+    <p>お問い合わせありがとうございます。内容を確認のうえ、ご連絡いたします。</p>
+    <a href="/">トップへ戻る</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    padding-block: 140px;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text-sub);
+  }
+
+  a {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--ink);
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .thanks {
+      padding-block: 96px;
+    }
+  }
+</style>

@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { company, contactFormEndpoint } from '../../data/site';
+
+const topics = ['開発のご相談', 'お見積り', 'その他'];
+---
+
+<BaseLayout title="お問い合わせ" description="開発のご相談・お見積りはこちらのフォームからご連絡ください。" showCta={false}>
+  <div class="head container">
+    <div class="eyebrow">CONTACT</div>
+    <h1>お問い合わせ</h1>
+    <p>開発のご相談・お見積りは、以下のフォームからご連絡ください。2営業日以内にご返信します。</p>
+  </div>
+  <nav class="breadcrumb container" aria-label="パンくずリスト">
+    <a href="/">トップ</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">お問い合わせ</span>
+  </nav>
+
+  <section class="split container body">
+    <div class="mail">
+      <div class="mail-title">メールでのご連絡</div>
+      <a href={`mailto:${company.email}`}>{company.email}</a>
+    </div>
+
+    <form class="form" method="post" action={contactFormEndpoint || undefined} data-endpoint={contactFormEndpoint}>
+      <div class="row">
+        <div class="label" id="topic-label">ご用件 <span class="req">必須</span></div>
+        <div class="field radios" role="radiogroup" aria-labelledby="topic-label">
+          {
+            topics.map((t, i) => (
+              <label>
+                <input type="radio" name="topic" value={t} checked={i === 0} required />
+                {t}
+              </label>
+            ))
+          }
+        </div>
+      </div>
+      <div class="row">
+        <label class="label" for="company">会社名・団体名</label>
+        <div class="field"><input id="company" name="company" autocomplete="organization" /></div>
+      </div>
+      <div class="row">
+        <label class="label" for="name">お名前 <span class="req">必須</span></label>
+        <div class="field"><input id="name" name="name" autocomplete="name" required /></div>
+      </div>
+      <div class="row">
+        <label class="label" for="email">メールアドレス <span class="req">必須</span></label>
+        <div class="field"><input id="email" name="email" type="email" autocomplete="email" required /></div>
+      </div>
+      <div class="row">
+        <label class="label" for="message">お問い合わせ内容 <span class="req">必須</span></label>
+        <div class="field"><textarea id="message" name="message" rows="7" required></textarea></div>
+      </div>
+
+      <label class="agree">
+        <input type="checkbox" name="agree" required />
+        <span><a href="/privacy/" target="_blank">プライバシーポリシー</a>に同意する</span>
+      </label>
+
+      <p class="status" role="status" aria-live="polite"></p>
+
+      <div class="submit-wrap">
+        <button type="submit" class="submit">送信する →</button>
+      </div>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.form');
+  const status = form?.querySelector<HTMLElement>('.status');
+  const submit = form?.querySelector<HTMLButtonElement>('.submit');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!status || !submit) return;
+
+    const endpoint = form.dataset.endpoint;
+    if (!endpoint) {
+      status.textContent = '現在フォームは準備中です。お手数ですが、メールでご連絡ください。';
+      return;
+    }
+
+    submit.disabled = true;
+    status.textContent = '送信しています…';
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      location.href = '/contact/thanks/';
+    } catch {
+      status.textContent = '送信できませんでした。時間をおいて再度お試しいただくか、メールでご連絡ください。';
+      submit.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .head {
+    padding-block: 96px 72px;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .head .eyebrow {
+    color: #999;
+    letter-spacing: 0.32em;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 56px;
+    font-weight: 700;
+  }
+
+  .head p {
+    font-size: 15px;
+    line-height: 2;
+    color: #bbb;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 10px;
+    padding-block: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+
+  [aria-current='page'] {
+    color: var(--ink);
+  }
+
+  .body {
+    padding-block: 96px 120px;
+  }
+
+  .mail {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-sub);
+  }
+
+  .mail-title {
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid var(--ink);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(120px, 220px) minmax(0, 1fr);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .label {
+    padding: 24px;
+    background: var(--bg-sub);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .req {
+    margin-left: 6px;
+    padding: 2px 6px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .field {
+    padding: 14px 24px;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 15px;
+  }
+
+  .field textarea {
+    resize: vertical;
+  }
+
+  .radios {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+    padding-block: 20px;
+    font-size: 14px;
+  }
+
+  .radios label,
+  .agree {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .radios label {
+    white-space: nowrap;
+  }
+
+  .agree {
+    justify-content: center;
+    gap: 10px;
+    margin: 40px 0 28px;
+    font-size: 14px;
+  }
+
+  .agree a {
+    text-decoration: underline;
+  }
+
+  .status:empty {
+    display: none;
+  }
+
+  .status {
+    margin-bottom: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .submit-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .submit {
+    padding: 22px clamp(40px, 8vw, 96px);
+    border: 0;
+    background: var(--ink);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .submit:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  @media (max-width: 600px) {
+    .head {
+      padding-block: 64px 48px;
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+
+    .body {
+      padding-block: 56px 80px;
+    }
+
+    .row {
+      display: block;
+    }
+
+    .label {
+      display: block;
+      padding: 14px 16px;
+    }
+
+    .field {
+      padding: 14px 0;
+    }
+
+    .submit {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { career, company, skills } from '../data/site';
+
+// 代表者の写真。public/ に画像を置いてパスを入れると表示されます
+const portrait: string | undefined = undefined;
+---
+
+<BaseLayout title="代表者について" description="合同会社Fujita-create 代表社員の経歴と得意分野をご紹介します。">
+  <PageHero title="代表者について" en="PROFILE" note="PAGE VISUAL — 光と影（モノクロ 2560×720）" />
+
+  <section class="split container intro">
+    {
+      portrait ? (
+        <img src={portrait} alt={`代表社員 ${company.representative}`} class="portrait" />
+      ) : (
+        <div class="portrait placeholder">PORTRAIT 3:4（任意・後ろ姿や手元でも可）</div>
+      )
+    }
+    <div>
+      <div class="role">代表社員</div>
+      <div class="name">
+        <span class="name-ja">{company.representative}</span>
+        <span class="name-en en">{company.representativeEn}</span>
+      </div>
+      <p class="bio">（自己紹介文）Webアプリケーションからインフラまで、ひとつのサービスを最初から最後まで自分の手で組み立てることを得意としています。</p>
+      <ul class="skills" aria-label="得意な技術">
+        {skills.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="career-section container">
+    <div class="split">
+      <div>
+        <div class="eyebrow">CAREER</div>
+        <h2 class="section-title">経歴</h2>
+      </div>
+      <dl class="career">
+        {
+          career.map((c) => (
+            <div class="career-row">
+              <dt class="en">{c.date}</dt>
+              <dd>{c.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    padding-block: 120px 104px;
+  }
+
+  .portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: 420px;
+    object-fit: cover;
+    padding: 14px;
+  }
+
+  img.portrait {
+    padding: 0;
+  }
+
+  .role {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 20px;
+    margin-bottom: 40px;
+  }
+
+  .name-ja {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .name-en {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--muted-2);
+  }
+
+  .bio {
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text);
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills li {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    font: 12px var(--font-mono);
+  }
+
+  .career-section {
+    padding-block: 104px;
+    background: var(--bg-sub);
+  }
+
+  .career {
+    background: #fff;
+    border-top: 2px solid var(--ink);
+  }
+
+  .career-row {
+    display: grid;
+    grid-template-columns: minmax(90px, 160px) minmax(0, 1fr);
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--line-strong);
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .career-row dt {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .portrait {
+      max-width: 320px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .intro,
+    .career-section {
+      padding-block: 72px;
+    }
+
+    .name-ja {
+      font-size: 32px;
+    }
+
+    .bio {
+      font-size: 15px;
+    }
+
+    .career-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+      padding: 20px;
+    }
+  }
+</style>
