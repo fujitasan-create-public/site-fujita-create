@@ -91,8 +91,12 @@ const hasMedia = Boolean(image || video);
     bottom: calc(var(--wave-h) + clamp(48px, 8vw, 110px));
   }
 
+  /*
+   * 2 行目（4 文字分の字下げ＋4 文字＝約 8 文字幅）が狭い画面でも 1 行に収まるよう、
+   * 文字の大きさを画面幅に合わせて縮める
+   */
   .hero-large h1 {
-    font-size: clamp(44px, 7vw, 100px);
+    font-size: clamp(28px, 9vw, 100px);
     line-height: 1.35;
     letter-spacing: 0.04em;
   }
