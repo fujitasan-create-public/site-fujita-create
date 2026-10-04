@@ -105,7 +105,7 @@ export const career: CareerItem[] = [
     highlight: true,
   },
   {
-    date: '2026.11',
+    date: '2026.10',
     title: '合同会社Fujita-create を設立',
     detail: '代表社員に就任。これまでの経験を生かし、法人として開発の受託を開始。',
     highlight: true,
