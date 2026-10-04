@@ -221,7 +221,7 @@ const valuesImage: string | undefined = undefined;
 
   .business {
     position: relative;
-    padding-block: 40px 104px;
+    padding-block: 64px 120px;
     background: var(--accent);
     color: #fff;
   }
@@ -234,7 +234,7 @@ const valuesImage: string | undefined = undefined;
   .business-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 12px 0 0;
+    margin: clamp(40px, 5vw, 72px) 0 0;
     padding: 0;
     list-style: none;
     border-top: 2px solid #fff;
@@ -243,7 +243,7 @@ const valuesImage: string | undefined = undefined;
   .business-list li {
     display: flex;
     flex-direction: column;
-    padding: 40px clamp(20px, 3vw, 40px) 8px;
+    padding: 48px clamp(20px, 3vw, 40px) 8px;
   }
 
   .business-list li:first-child {
@@ -268,7 +268,8 @@ const valuesImage: string | undefined = undefined;
 
   .business-title {
     margin-bottom: 8px;
-    font-size: clamp(20px, 2vw, 26px);
+    /* 「大切にしていること」の各項目の見出しと同じ大きさ */
+    font-size: clamp(22px, 2.2vw, 30px);
     font-weight: 700;
     line-height: 1.5;
   }
