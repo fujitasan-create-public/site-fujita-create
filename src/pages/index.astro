@@ -76,23 +76,20 @@ const valuesImage: string | undefined = undefined;
 
   <!-- オレンジ：事業内容 -->
   <section class="business container">
-    <div class="split">
-      <div>
-        <div class="eyebrow">BUSINESS</div>
-        <h2 class="feature-title feature-title-long">事業内容</h2>
-      </div>
-      <ol class="business-list">
-        {
-          services.map((s, i) => (
-            <li>
-              <span class="business-num en">{String(i + 1).padStart(2, '0')}</span>
-              <span class="business-title">{s.title}</span>
-              <span class="business-text">{s.short}</span>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
+    <div class="eyebrow">BUSINESS</div>
+    <h2 class="feature-title feature-title-long">事業内容</h2>
+    <ol class="business-list">
+      {
+        services.map((s, i) => (
+          <li>
+            <span class="business-num en">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="business-title">{s.title}</h3>
+            <span class="business-en en">{s.en}</span>
+            <p class="business-text">{s.lead}</p>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 </BaseLayout>
 
@@ -233,31 +230,55 @@ const valuesImage: string | undefined = undefined;
     color: #fff;
   }
 
+  /* 3 列に分けて、各列の中は上から番号・見出し・説明 */
   .business-list {
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 12px 0 0;
     padding: 0;
     list-style: none;
     border-top: 2px solid #fff;
   }
 
   .business-list li {
-    display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: 24px;
-    align-items: baseline;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--accent-line);
+    display: flex;
+    flex-direction: column;
+    padding: 40px clamp(20px, 3vw, 40px) 8px;
+  }
+
+  .business-list li:first-child {
+    padding-left: 0;
+  }
+
+  .business-list li:last-child {
+    padding-right: 0;
+  }
+
+  .business-list li + li {
+    border-left: 1px solid var(--accent-line);
   }
 
   .business-num {
-    font-size: 20px;
+    margin-bottom: 20px;
+    font-size: clamp(36px, 3.6vw, 52px);
     font-weight: 600;
+    line-height: 1;
     color: rgba(255, 255, 255, 0.7);
   }
 
   .business-title {
-    font-size: 20px;
+    margin-bottom: 8px;
+    font-size: clamp(20px, 2vw, 26px);
     font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .business-en {
+    margin-bottom: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .business-text {
@@ -285,13 +306,20 @@ const valuesImage: string | undefined = undefined;
       max-width: 520px;
     }
 
-    .business-list li {
-      grid-template-columns: 40px minmax(0, 1fr);
-      gap: 8px 16px;
+    /* 狭い画面では 3 列をやめて縦に積む */
+    .business-list {
+      grid-template-columns: minmax(0, 1fr);
     }
 
-    .business-text {
-      grid-column: 2;
+    .business-list li,
+    .business-list li:first-child,
+    .business-list li:last-child {
+      padding: 32px 0;
+    }
+
+    .business-list li + li {
+      border-left: 0;
+      border-top: 1px solid var(--accent-line);
     }
   }
 
