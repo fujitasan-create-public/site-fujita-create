@@ -72,9 +72,6 @@ export const products: Product[] = [
   { kind: '法人', cat: 'WEB APPLICATION', year: '2026', title: '〇〇業向け 予約管理システム', desc: '電話とFAXで受けていた予約をWebで一元管理。', stack: 'Next.js / PostgreSQL / AWS' },
   { kind: '法人', cat: 'BUSINESS SYSTEM', year: '2026', title: '在庫・受発注業務のシステム化', desc: '表計算で管理していた在庫と発注を一つの画面に統合。', stack: 'React / Python / GCP' },
   { kind: '法人', cat: 'INFRASTRUCTURE', year: '2026', title: 'オンプレミスからクラウドへの移行', desc: '社内サーバーをクラウドへ移行し、監視と自動バックアップを整備。', stack: 'AWS / Terraform / Docker' },
-  { kind: '個人', cat: 'WEB APPLICATION', year: '2025', title: '（個人開発）〇〇管理アプリ', desc: '日々の記録を手軽に残せるWebアプリ。企画からデザインまで担当。', stack: 'TypeScript / Firebase' },
-  { kind: '個人', cat: 'TOOL', year: '2025', title: '（個人開発）開発者向け〇〇ツール', desc: '日常の作業を自動化するコマンドラインツール。オープンソースで公開。', stack: 'Go / GitHub Actions' },
-  { kind: '個人', cat: 'WEB APPLICATION', year: '2024', title: '（個人開発）〇〇検索サービス', desc: '公開データを整理し、条件で絞り込めるようにした検索サービス。', stack: 'Python / FastAPI / Vercel' },
 ];
 
 export const skills = ['TypeScript', 'React', 'Python', 'AWS', 'Docker'];

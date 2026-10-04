@@ -2,35 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { products } from '../data/site';
-
-const filters = [
-  { key: 'all', label: 'すべて' },
-  { key: '法人', label: '法人' },
-  { key: '個人', label: '個人' },
-];
 ---
 
-<BaseLayout title="プロダクト事例" description="法人のお客様からご依頼いただいた開発と、個人として企画・開発したプロダクトをご紹介します。">
+<BaseLayout title="プロダクト事例" description="法人のお客様からご依頼いただいた開発事例の一部をご紹介します。">
   <PageHero title="プロダクト事例" en="PRODUCTS" note="PAGE VISUAL — 質感（2560×720）" />
 
   <section class="container products">
     <div class="products-head">
       <p data-reveal>法人のお客様からご依頼いただいた開発の中から、一部を抜粋して掲載しています。このほかにも、さまざまな業務システムやWebサービスの開発に携わってきました。守秘義務のある案件は概要のみ記載しています。</p>
-      <div class="filters" data-reveal role="group" aria-label="種別で絞り込む">
-        {
-          filters.map((f) => (
-            <button type="button" class="filter" data-filter={f.key} aria-pressed={f.key === 'all' ? 'true' : 'false'}>
-              {f.label}
-            </button>
-          ))
-        }
-      </div>
     </div>
 
     <ul class="grid">
       {
         products.map((p, i) => (
-          <li class="card" data-kind={p.kind} data-reveal style={`--reveal-delay: ${(i % 3) * 120}ms`}>
+          <li class="card" data-reveal style={`--reveal-delay: ${(i % 3) * 120}ms`}>
             {p.image ? (
               <img src={p.image} alt="" class="thumb" loading="lazy" />
             ) : (
@@ -51,31 +36,12 @@ const filters = [
   </section>
 </BaseLayout>
 
-<script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
-  const cards = document.querySelectorAll<HTMLElement>('.card');
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const key = button.dataset.filter;
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      cards.forEach((card) => {
-        card.hidden = key !== 'all' && card.dataset.kind !== key;
-      });
-    });
-  });
-</script>
-
 <style>
   .products {
     padding-block: 96px 120px;
   }
 
   .products-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 32px;
     margin-bottom: 48px;
   }
 
@@ -84,26 +50,6 @@ const filters = [
     font-size: 15px;
     line-height: 2;
     color: var(--text);
-  }
-
-  .filters {
-    display: flex;
-    flex: none;
-    border: 1px solid var(--accent);
-  }
-
-  .filter {
-    padding: 12px 28px;
-    border: 0;
-    background: #fff;
-    color: var(--ink);
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  .filter[aria-pressed='true'] {
-    background: var(--accent);
-    color: #fff;
   }
 
   .grid {
@@ -120,10 +66,6 @@ const filters = [
     display: flex;
     flex-direction: column;
     gap: 14px;
-  }
-
-  .card[hidden] {
-    display: none;
   }
 
   .thumb {
@@ -177,15 +119,6 @@ const filters = [
     .grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-    .products-head {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .filters {
-      align-self: flex-start;
-    }
   }
 
   @media (max-width: 600px) {
@@ -195,15 +128,6 @@ const filters = [
 
     .products {
       padding-block: 64px 80px;
-    }
-
-    .filters {
-      align-self: stretch;
-    }
-
-    .filter {
-      flex: 1;
-      padding-inline: 0;
     }
   }
 </style>
