@@ -56,6 +56,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     {showCta && <ContactCta waveColor={ctaWaveColor} />}
-    <Footer wave={!showCta} />
+    <Footer />
   </body>
 </html>

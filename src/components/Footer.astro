@@ -1,17 +1,8 @@
 ---
-import Wave from './Wave.astro';
 import { company, companyInfo, nav } from '../data/site';
-
-interface Props {
-  // 直前に CTA がないページでは、フッター上端を波にする
-  wave?: boolean;
-}
-
-const { wave = false } = Astro.props;
 ---
 
-<footer class:list={['footer container', { 'has-wave': wave }]}>
-  {wave && <Wave color="#fff" position="top" flip />}
+<footer class="footer container">
   <div class="footer-main">
     <div class="footer-brand">
       <a href="/" class="brand">
@@ -45,14 +36,9 @@ const { wave = false } = Astro.props;
 
 <style>
   .footer {
-    background: var(--accent);
-    color: #fff;
     padding-block: 72px 32px;
-  }
-
-  .has-wave {
-    position: relative;
-    padding-top: clamp(110px, 12vw, 170px);
+    border-top: 1px solid var(--line);
+    background: #fff;
   }
 
   .footer-main {
@@ -60,7 +46,7 @@ const { wave = false } = Astro.props;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     gap: var(--split-gap);
     padding-bottom: 56px;
-    border-bottom: 1px solid var(--accent-line);
+    border-bottom: 1px solid var(--line);
   }
 
   .footer-brand {
@@ -78,7 +64,7 @@ const { wave = false } = Astro.props;
   .brand-mark {
     width: 22px;
     height: 22px;
-    background: #fff;
+    background: var(--accent);
   }
 
   .brand-text {
@@ -90,13 +76,12 @@ const { wave = false } = Astro.props;
   .brand-name {
     font-size: 16px;
     font-weight: 700;
-    color: #fff;
   }
 
   .brand-en {
     font: 600 10px var(--font-en);
     letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--muted);
   }
 
   .footer-nav {
@@ -120,15 +105,15 @@ const { wave = false } = Astro.props;
     grid-template-columns: 5.5em minmax(0, 1fr);
     column-gap: 24px;
     padding: 12px 0;
-    border-top: 1px solid var(--accent-line);
+    border-top: 1px solid var(--line);
   }
 
   .info-row:nth-last-child(-n + 2) {
-    border-bottom: 1px solid var(--accent-line);
+    border-bottom: 1px solid var(--line);
   }
 
   dt {
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--muted);
   }
 
   .footer-bottom {
@@ -137,7 +122,7 @@ const { wave = false } = Astro.props;
     gap: 16px;
     padding-top: 24px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--muted);
   }
 
   .footer-bottom small {

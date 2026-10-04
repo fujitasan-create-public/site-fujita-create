@@ -2,14 +2,15 @@
 import Wave from './Wave.astro';
 
 interface Props {
+  // 直前のセクションが色付きのとき、その色を指定すると上端を波にする
   waveColor?: string;
 }
 
-const { waveColor = '#fff' } = Astro.props;
+const { waveColor } = Astro.props;
 ---
 
-<section class="cta container">
-  <Wave color={waveColor} position="top" />
+<section class:list={['cta container', { 'has-wave': waveColor }]}>
+  {waveColor && <Wave color={waveColor} position="top" />}
   <div>
     <div class="eyebrow">CONTACT</div>
     <p class="cta-title">開発のご相談・お見積り</p>
@@ -19,19 +20,22 @@ const { waveColor = '#fff' } = Astro.props;
 
 <style>
   .cta {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
-    position: relative;
-    padding-block: clamp(96px, 12vw, 160px) 72px;
-    border-bottom: 1px solid var(--accent-line);
-    background: var(--accent);
-    color: #fff;
+    padding-block: 72px;
+    border-top: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .has-wave {
+    padding-top: clamp(96px, 12vw, 160px);
+    border-top: 0;
   }
 
   .eyebrow {
-    color: #fff;
     margin-bottom: 12px;
   }
 
@@ -44,8 +48,8 @@ const { waveColor = '#fff' } = Astro.props;
     flex: none;
     padding: 22px 56px;
     border-radius: 999px;
-    background: #fff;
-    color: var(--accent-deep);
+    background: var(--accent);
+    color: #fff;
     font-size: 15px;
     font-weight: 700;
   }
@@ -54,7 +58,11 @@ const { waveColor = '#fff' } = Astro.props;
     .cta {
       flex-direction: column;
       align-items: stretch;
-      padding-block: 88px 56px;
+      padding-block: 56px;
+    }
+
+    .has-wave {
+      padding-top: 88px;
     }
 
     .cta-title {
