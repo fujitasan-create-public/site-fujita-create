@@ -10,7 +10,7 @@ import { services, values } from '../data/site';
 
   <section class="philosophy container">
     <div class="philosophy-inner">
-      <div>
+      <div class="philosophy-text">
         <div class="eyebrow">PHILOSOPHY</div>
         <h2 class="philosophy-title">想い</h2>
         <p class="catch">本当に必要なものを、<br />誠実につくる。</p>
@@ -101,6 +101,11 @@ import { services, values } from '../data/site';
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: var(--split-gap);
     align-items: center;
+  }
+
+  /* 文字のかたまりを左側の列の中央に置く（行揃えは左のまま） */
+  .philosophy-text {
+    justify-self: center;
   }
 
   .philosophy-title {
@@ -216,6 +221,10 @@ import { services, values } from '../data/site';
   @media (max-width: 900px) {
     .philosophy-inner {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .philosophy-text {
+      justify-self: start;
     }
 
     .philosophy-image {
