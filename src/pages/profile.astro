@@ -37,18 +37,27 @@ const portrait: string | undefined = undefined;
     <div class="split">
       <div>
         <div class="eyebrow" data-reveal>CAREER</div>
-        <h2 class="section-title" data-reveal>経歴</h2>
+        <h2 class="career-title" data-reveal>経歴</h2>
       </div>
-      <dl class="career">
-        {
-          career.map((c) => (
-            <div class="career-row" data-reveal>
-              <dt class="en">{c.date}</dt>
-              <dd>{c.text}</dd>
-            </div>
-          ))
-        }
-      </dl>
+      <div class="timeline">
+        {/* 縦の線。画面に入ると上から下へ伸びる */}
+        <div class="timeline-line" data-reveal="line" aria-hidden="true"></div>
+        <ol class="timeline-list">
+          {
+            career.map((c, i) => (
+              <li
+                class:list={['timeline-item', { 'is-future': c.text.includes('予定') }]}
+                data-reveal
+                style={`--reveal-delay: ${300 + i * 180}ms`}
+              >
+                <time class="timeline-date en">{c.date}</time>
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="timeline-text">{c.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -125,23 +134,88 @@ const portrait: string | undefined = undefined;
     background: var(--bg-sub);
   }
 
-  .career {
-    background: #fff;
-    border-top: 2px solid var(--accent);
+  .career-title {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
   }
 
-  .career-row {
+  /* ---------- 経歴のタイムライン ---------- */
+
+  .timeline {
+    --date-w: clamp(92px, 9vw, 128px);
+    --rail-w: 56px;
+    --line-x: calc(var(--date-w) + var(--rail-w) / 2);
+    position: relative;
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: calc(var(--line-x) - 1px);
+    width: 2px;
+    background: var(--accent);
+    transform-origin: top;
+  }
+
+  .timeline-list {
     display: grid;
-    grid-template-columns: minmax(90px, 160px) minmax(0, 1fr);
-    padding: 24px 28px;
-    border-bottom: 1px solid var(--line-strong);
-    font-size: 15px;
-    line-height: 1.85;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .career-row dt {
-    font-size: 16px;
+  .timeline-item {
+    display: grid;
+    grid-template-columns: var(--date-w) var(--rail-w) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .timeline-date {
+    font-size: clamp(18px, 1.8vw, 24px);
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+
+  .timeline-dot {
+    position: relative;
+    z-index: 1;
+    justify-self: center;
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    background: var(--accent);
+    /* 背景色の輪で、線が玉の後ろを通っているように見せる */
+    box-shadow: 0 0 0 6px var(--bg-sub);
+  }
+
+  .timeline-text {
+    padding: 20px 26px;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 16px;
+    line-height: 1.8;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  /* これからの予定は、中抜きの玉と控えめな文字で */
+  .is-future .timeline-dot {
+    background: #fff;
+  }
+
+  .is-future .timeline-date,
+  .is-future .timeline-text {
+    color: var(--muted);
+  }
+
+  .is-future .timeline-text {
+    background: transparent;
+    border: 1px dashed var(--num);
   }
 
   @media (max-width: 900px) {
@@ -164,10 +238,34 @@ const portrait: string | undefined = undefined;
       font-size: 15px;
     }
 
-    .career-row {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 4px;
-      padding: 20px;
+    /* スマホでは線を左端に寄せ、日付を本文の上に置く */
+    .timeline {
+      --rail-w: 32px;
+      --line-x: calc(var(--rail-w) / 2);
+    }
+
+    .timeline-item {
+      grid-template-columns: var(--rail-w) minmax(0, 1fr);
+      row-gap: 8px;
+    }
+
+    .timeline-dot {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .timeline-date {
+      grid-column: 2;
+      grid-row: 1;
+      padding-left: 12px;
+      text-align: left;
+    }
+
+    .timeline-text {
+      grid-column: 2;
+      margin-left: 12px;
+      padding: 16px 18px;
+      font-size: 15px;
     }
   }
 </style>

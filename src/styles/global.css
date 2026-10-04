@@ -111,6 +111,18 @@ h3,
   transform: none;
 }
 
+/* data-reveal="line"：縦線を上から下へ伸ばす */
+.js [data-reveal='line'] {
+  opacity: 1;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1) var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal='line'].is-revealed {
+  transform: scaleY(1);
+}
+
 /* インライン要素は transform が効かないため */
 .hero-title {
   display: inline-block;

@@ -67,10 +67,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         el.classList.add('is-revealed');
         // アニメーションが終わったら属性を外し、ホバーなど通常のスタイルに戻す
         const delay = parseFloat(getComputedStyle(el).getPropertyValue('--reveal-delay')) || 0;
+        const duration = el.dataset.reveal === 'line' ? 1700 : 1100;
         setTimeout(() => {
           el.removeAttribute('data-reveal');
           el.classList.remove('is-revealed');
-        }, delay + 1100);
+        }, delay + duration);
       };
 
       if ('IntersectionObserver' in window) {
