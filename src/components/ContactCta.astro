@@ -13,7 +13,10 @@ const { waveColor } = Astro.props;
   {waveColor && <Wave color={waveColor} position="top" />}
   <div>
     <div class="eyebrow" data-reveal>CONTACT</div>
-    <p class="cta-title" data-reveal style="--reveal-delay: 100ms">開発のご相談・お見積り</p>
+    <p class="cta-title" data-reveal style="--reveal-delay: 100ms">開発のご相談・業務委託のご依頼</p>
+    <p class="cta-lead" data-reveal style="--reveal-delay: 150ms">
+      開発のご依頼に加え、開発会社さまからの業務委託・プロジェクト参画のご相談も承っています。
+    </p>
   </div>
   <a href="/contact/" class="cta-button" data-reveal style="--reveal-delay: 200ms">お問い合わせフォーム →</a>
 </section>
@@ -42,6 +45,13 @@ const { waveColor } = Astro.props;
   .cta-title {
     font-size: 32px;
     font-weight: 700;
+  }
+
+  .cta-lead {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
   }
 
   .cta-button {

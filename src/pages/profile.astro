@@ -46,7 +46,7 @@ const portrait: string | undefined = undefined;
   <section class="career-section container">
     <Wave color="#fff" position="top" />
     <div class="split">
-      <div>
+      <div class="career-head">
         <div class="eyebrow" data-reveal>CAREER</div>
         <h2 class="career-title" data-reveal>経歴</h2>
       </div>
@@ -151,6 +151,11 @@ const portrait: string | undefined = undefined;
     position: relative;
     padding-block: clamp(120px, 14vw, 180px) 104px;
     background: var(--bg-sub);
+  }
+
+  /* 見出しを左側の列の中央に置く */
+  .career-head {
+    justify-self: center;
   }
 
   .career-title {
@@ -288,6 +293,10 @@ const portrait: string | undefined = undefined;
   }
 
   @media (max-width: 900px) {
+    .career-head {
+      justify-self: start;
+    }
+
     .portrait {
       max-width: 320px;
     }

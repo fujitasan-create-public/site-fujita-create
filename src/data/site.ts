@@ -5,7 +5,7 @@ export const company = {
   name: '合同会社Fujita-create',
   nameEn: 'FUJITA-CREATE LLC',
   copyright: 'Fujita-create LLC',
-  email: 'info@fujita-create.com',
+  email: 'kanaru.fujita@fujita-create.com',
   representative: '藤田 香成',
   representativeEn: 'KANARU FUJITA',
 };
