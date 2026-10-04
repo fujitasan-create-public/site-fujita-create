@@ -173,6 +173,17 @@ const valuesImage: string | undefined = undefined;
     padding: 16px;
   }
 
+  /* 写真を画面の端から少し離し、中央寄りに置く */
+  .philosophy .feature-image {
+    justify-self: start;
+    width: 86%;
+  }
+
+  .values-section .feature-image {
+    justify-self: end;
+    width: 86%;
+  }
+
   /* ---------- 想い（オレンジ） ---------- */
 
   .philosophy {
@@ -333,7 +344,11 @@ const valuesImage: string | undefined = undefined;
       order: 0;
     }
 
-    .feature-image {
+    .feature-image,
+    .philosophy .feature-image,
+    .values-section .feature-image {
+      justify-self: start;
+      width: 100%;
       max-width: 520px;
     }
 
