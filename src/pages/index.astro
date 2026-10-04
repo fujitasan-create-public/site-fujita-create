@@ -5,7 +5,7 @@ import Wave from '../components/Wave.astro';
 import { services, values } from '../data/site';
 
 // 「大切にしていること」の写真。public/ に画像を置いてパスを入れると表示されます
-const valuesImage: string | undefined = undefined;
+const valuesImage: string | undefined = '/images/values.jpg';
 ---
 
 <BaseLayout ctaWaveColor="var(--accent)" description="合同会社Fujita-createの会社概要です。事業への想い、大切にしていること、事業内容をご紹介します。">
@@ -77,7 +77,15 @@ const valuesImage: string | undefined = undefined;
       </div>
       {
         valuesImage ? (
-          <img src={valuesImage} alt="" class="feature-image" loading="lazy" data-reveal />
+          <img
+            src={valuesImage}
+            alt="ノートパソコンの画面を指しながら、お客様と打ち合わせをしている様子"
+            class="feature-image"
+            width="1051"
+            height="1100"
+            loading="lazy"
+            data-reveal
+          />
         ) : (
           <div class="feature-image placeholder" data-reveal>PHOTO（縦長 4:5 程度）</div>
         )
