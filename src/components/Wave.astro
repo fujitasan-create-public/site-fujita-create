@@ -1,35 +1,54 @@
 ---
-// セクションの上端・下端を波の形にする飾り。
+// セクションの上端・下端を波の形にする飾り。波はゆっくり横に流れ続ける。
 // 親要素に position: relative が必要です。
 // color には「隣のセクションの色」を指定します（波の部分がその色で塗られます）。
 interface Props {
   color: string;
   position?: 'top' | 'bottom';
-  // 左右反転（同じページで波の形が続くのを避けるため）
+  // 左右反転（流れる向きも逆になる。同じページで同じ形が続くのを避けるため）
   flip?: boolean;
 }
 
 const { color, position = 'bottom', flip = false } = Astro.props;
+
+// 幅 1440 で 1 周期の波。山と谷を交互に置き、それぞれで傾きを水平にしてなめらかにつなぐ。
+// 始点と終点が同じ高さの谷なので、横に並べると継ぎ目なくつながる
+const points: [number, number][] = [
+  [0, 92],
+  [420, 30],
+  [860, 82],
+  [1140, 48],
+  [1440, 92],
+];
+
+const period = (offset: number) =>
+  points
+    .slice(1)
+    .map(([x, y], i) => {
+      const [px, py] = points[i];
+      const k = (x - px) * 0.45;
+      return `C${offset + px + k},${py} ${offset + x - k},${y} ${offset + x},${y}`;
+    })
+    .join(' ');
+
+// 2 周期分を描き、半分（1 周期）ずらすアニメーションをくり返す
+const d = `M0,${points[0][1]} ${period(0)} ${period(1440)} L2880,120 L0,120 Z`;
 ---
 
-<svg
-  class:list={['wave', position, { flip }]}
-  viewBox="0 0 1440 120"
-  preserveAspectRatio="none"
-  aria-hidden="true"
-  style={`fill: ${color}`}
->
-  <path d="M0,70 C180,118 360,118 560,72 C760,26 900,6 1080,40 C1230,68 1340,96 1440,78 L1440,120 L0,120 Z"></path>
-</svg>
+<div class:list={['wave', position, { flip }]} aria-hidden="true">
+  <svg class="wave-track" viewBox="0 0 2880 120" preserveAspectRatio="none" style={`fill: ${color}`}>
+    <path d={d}></path>
+  </svg>
+</div>
 
 <style>
   .wave {
     position: absolute;
     left: 0;
     z-index: 1;
-    display: block;
     width: 100%;
     height: clamp(36px, 6vw, 96px);
+    overflow: hidden;
     pointer-events: none;
   }
 
@@ -48,5 +67,28 @@ const { color, position = 'bottom', flip = false } = Astro.props;
 
   .top.flip {
     transform: scale(-1, -1);
+  }
+
+  .wave-track {
+    display: block;
+    width: 200%;
+    height: 100%;
+    animation: wave-flow 24s linear infinite;
+  }
+
+  @keyframes wave-flow {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave-track {
+      animation: none;
+    }
   }
 </style>
