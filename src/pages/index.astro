@@ -9,7 +9,17 @@ const valuesImage: string | undefined = undefined;
 ---
 
 <BaseLayout ctaWaveColor="var(--accent)" description="合同会社Fujita-createの会社概要です。事業への想い、大切にしていること、事業内容をご紹介します。">
-  <PageHero title="会社概要" en="ABOUT" note="PAGE VISUAL — 建築の細部（2560×720）" breadcrumb={false} waveColor="var(--accent)" />
+  <PageHero
+    title="新しい価値を創造する"
+    video="/videos/hero.mp4"
+    poster="/videos/hero-poster.jpg"
+    large
+    breadcrumb={false}
+    waveColor="var(--accent)"
+  >
+    <span class="hero-line">新しい価値を</span>
+    <span class="hero-line hero-line-indent">創造する</span>
+  </PageHero>
 
   <!-- オレンジ：想い（左に文字・右に写真） -->
   <section class="philosophy container">
@@ -94,6 +104,17 @@ const valuesImage: string | undefined = undefined;
 </BaseLayout>
 
 <style>
+  /* ---------- ヒーローの見出し ---------- */
+
+  .hero-line {
+    display: block;
+  }
+
+  /* 2 行目を字下げして、1 行目と行末をそろえる */
+  .hero-line-indent {
+    padding-left: 2em;
+  }
+
   /* ---------- 共通：文字と写真の 2 列 ---------- */
 
   .feature {

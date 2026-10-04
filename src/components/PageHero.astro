@@ -4,7 +4,13 @@ import Wave from './Wave.astro';
 // 下層ページ上部のビジュアル＋ページタイトル＋パンくず
 interface Props {
   title: string;
-  en: string;
+  // 見出し上の英字（省略すると出さない）
+  en?: string;
+  // 背景にループ再生する動画（public/ からのパス）と、読み込み前に出す静止画
+  video?: string;
+  poster?: string;
+  // トップ用の大きなヒーローにする
+  large?: boolean;
   // public/ に置いた画像のパス。未設定ならプレースホルダー表示
   image?: string;
   // 画像が入るまで表示する、想定写真のメモ
@@ -15,14 +21,32 @@ interface Props {
   waveColor?: string;
 }
 
-const { title, en, image, note, breadcrumb = true, waveColor = '#fff' } = Astro.props;
+const { title, en, video, poster, large = false, image, note, breadcrumb = true, waveColor = '#fff' } = Astro.props;
+const hasMedia = Boolean(image || video);
 ---
 
-<div class="hero" style={image ? `background-image: url(${image})` : undefined}>
-  {!image && note && <span class="note">{note}</span>}
+<div class:list={['hero', { 'hero-large': large }]} style={image ? `background-image: url(${image})` : undefined}>
+  {
+    video && (
+      <video
+        class="hero-video"
+        src={video}
+        poster={poster}
+        autoplay
+        muted
+        loop
+        playsinline
+        disablepictureinpicture
+        preload="auto"
+        aria-hidden="true"
+      />
+    )
+  }
+  {!hasMedia && note && <span class="note">{note}</span>}
   <div class="hero-text">
-    <div class="eyebrow">{en}</div>
-    <h1>{title}</h1>
+    {en && <div class="eyebrow">{en}</div>}
+    {/* 改行などを入れたいときは、中身を slot で渡す */}
+    <h1>{Astro.slots.has('default') ? <slot /> : title}</h1>
   </div>
   <Wave color={waveColor} />
 </div>
@@ -47,12 +71,39 @@ const { title, en, image, note, breadcrumb = true, waveColor = '#fff' } = Astro.
     background-position: center;
   }
 
+  .hero-large {
+    height: clamp(520px, 82vh, 860px);
+  }
+
+  .hero-large h1 {
+    font-size: clamp(44px, 7vw, 100px);
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+  }
+
+  /* 操作できない背景動画（コントロールなし・クリック無効） */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
   /* 写真を入れたときに文字が読めるよう、下側を少し暗くする */
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent 60%);
+  }
+
+  /* 明るい動画の上でも白い見出しが読めるよう、少し強めに暗くする */
+  .hero-large::after {
+    background:
+      linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 65%),
+      rgba(0, 0, 0, 0.12);
   }
 
   .note {
@@ -99,6 +150,10 @@ const { title, en, image, note, breadcrumb = true, waveColor = '#fff' } = Astro.
   @media (max-width: 600px) {
     .hero {
       height: 280px;
+    }
+
+    .hero-large {
+      height: clamp(440px, 70vh, 620px);
     }
 
     .note {
