@@ -9,9 +9,13 @@ interface Props {
   image?: string;
   // 画像が入るまで表示する、想定写真のメモ
   note?: string;
+  // パンくずリストを出すか（トップページでは出さない）
+  breadcrumb?: boolean;
+  // 下端の波の色（直後のセクションの背景色に合わせる）
+  waveColor?: string;
 }
 
-const { title, en, image, note } = Astro.props;
+const { title, en, image, note, breadcrumb = true, waveColor = '#fff' } = Astro.props;
 ---
 
 <div class="hero" style={image ? `background-image: url(${image})` : undefined}>
@@ -20,13 +24,17 @@ const { title, en, image, note } = Astro.props;
     <div class="eyebrow">{en}</div>
     <h1>{title}</h1>
   </div>
-  <Wave color="#fff" />
+  <Wave color={waveColor} />
 </div>
-<nav class="breadcrumb container" aria-label="パンくずリスト">
-  <a href="/">トップ</a>
-  <span aria-hidden="true">/</span>
-  <span aria-current="page">{title}</span>
-</nav>
+{
+  breadcrumb && (
+    <nav class="breadcrumb container" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{title}</span>
+    </nav>
+  )
+}
 
 <style>
   .hero {

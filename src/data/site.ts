@@ -23,7 +23,7 @@ export const companyInfo: { label: string; value: string }[] = [
 ];
 
 export const nav = [
-  { href: '/about/', label: '会社概要', en: 'ABOUT' },
+  { href: '/', label: '会社概要', en: 'ABOUT' },
   { href: '/products/', label: 'プロダクト事例', en: 'PRODUCTS' },
   { href: '/profile/', label: '代表者について', en: 'PROFILE' },
 ];

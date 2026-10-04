@@ -22,7 +22,7 @@ const {
   ctaWaveColor,
 } = Astro.props;
 
-const pageTitle = title ? `${title}｜${company.name}` : `${company.name}｜長く使える仕組みを、確かな技術で。`;
+const pageTitle = title ? `${title}｜${company.name}` : company.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 

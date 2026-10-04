@@ -17,8 +17,7 @@ Node.js 22.12 以上が必要です。
 
 | URL | ファイル |
 | --- | --- |
-| `/` | `src/pages/index.astro` |
-| `/about/` | `src/pages/about.astro` |
+| `/` | `src/pages/index.astro`（会社概要。旧 `/about/` はここへ転送） |
 | `/products/` | `src/pages/products.astro` |
 | `/profile/` | `src/pages/profile.astro` |
 | `/contact/` | `src/pages/contact/index.astro`（送信完了は `/contact/thanks/`） |
@@ -28,8 +27,7 @@ Node.js 22.12 以上が必要です。
 
 - 会社情報・事業内容・プロダクト事例・経歴などの文言は `src/data/site.ts` にまとめています。「〇〇」の箇所を正式な内容に置き換えてください。
 - 写真は `public/` に置き、次の場所でパスを指定すると表示されます（未指定の間はグレーのプレースホルダー）。
-  - トップのメインビジュアル: `src/pages/index.astro` の `heroImage`
-  - 下層ページのビジュアル: 各ページの `<PageHero image="...">`
+  - 各ページのビジュアル: 各ページの `<PageHero image="...">`
   - プロダクトのスクリーンショット: `src/data/site.ts` の各プロダクトの `image`
   - 代表者の写真: `src/pages/profile.astro` の `portrait`
 - お問い合わせフォームは、`src/data/site.ts` の `contactFormEndpoint` に Formspree などのフォーム送信サービスのURLを入れると動作します。
