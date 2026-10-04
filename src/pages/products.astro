@@ -15,8 +15,8 @@ const filters = [
 
   <section class="container products">
     <div class="products-head">
-      <p>法人のお客様からご依頼いただいた開発と、個人として企画・開発したプロダクトを掲載しています。守秘義務のある案件は概要のみ記載しています。</p>
-      <div class="filters" role="group" aria-label="種別で絞り込む">
+      <p data-reveal>法人のお客様からご依頼いただいた開発と、個人として企画・開発したプロダクトを掲載しています。守秘義務のある案件は概要のみ記載しています。</p>
+      <div class="filters" data-reveal role="group" aria-label="種別で絞り込む">
         {
           filters.map((f) => (
             <button type="button" class="filter" data-filter={f.key} aria-pressed={f.key === 'all' ? 'true' : 'false'}>
@@ -29,8 +29,8 @@ const filters = [
 
     <ul class="grid">
       {
-        products.map((p) => (
-          <li class="card" data-kind={p.kind}>
+        products.map((p, i) => (
+          <li class="card" data-kind={p.kind} data-reveal style={`--reveal-delay: ${(i % 4) * 100}ms`}>
             {p.image ? (
               <img src={p.image} alt="" class="thumb" loading="lazy" />
             ) : (

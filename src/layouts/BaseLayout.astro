@@ -31,6 +31,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -57,5 +58,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </main>
     {showCta && <ContactCta waveColor={ctaWaveColor} />}
     <Footer />
+
+    <script>
+      // data-reveal の要素が画面に入ったら表示する
+      const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+      const finish = (el: HTMLElement) => {
+        el.classList.add('is-revealed');
+        // アニメーションが終わったら属性を外し、ホバーなど通常のスタイルに戻す
+        const delay = parseFloat(getComputedStyle(el).getPropertyValue('--reveal-delay')) || 0;
+        setTimeout(() => {
+          el.removeAttribute('data-reveal');
+          el.classList.remove('is-revealed');
+        }, delay + 1100);
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              observer.unobserve(entry.target);
+              finish(entry.target as HTMLElement);
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.1 },
+        );
+        targets.forEach((el) => observer.observe(el));
+      } else {
+        targets.forEach(finish);
+      }
+    </script>
   </body>
 </html>

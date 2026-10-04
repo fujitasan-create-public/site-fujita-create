@@ -33,13 +33,13 @@ const sections = [
 
 <BaseLayout title="プライバシーポリシー" description={`${company.name}の個人情報の取り扱いについて。`}>
   <section class="container privacy">
-    <div class="eyebrow">PRIVACY POLICY</div>
-    <h1>プライバシーポリシー</h1>
-    <p class="lead">{company.name}（以下「当社」）は、お客様の個人情報を以下のとおり取り扱います。</p>
+    <div class="eyebrow" data-reveal>PRIVACY POLICY</div>
+    <h1 data-reveal>プライバシーポリシー</h1>
+    <p class="lead" data-reveal>{company.name}（以下「当社」）は、お客様の個人情報を以下のとおり取り扱います。</p>
     <ol>
       {
         sections.map((s) => (
-          <li>
+          <li data-reveal>
             <h2>{s.title}</h2>
             <p>{s.text}</p>
           </li>

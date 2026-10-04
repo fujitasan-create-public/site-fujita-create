@@ -14,19 +14,19 @@ const portrait: string | undefined = undefined;
   <section class="split container intro">
     {
       portrait ? (
-        <img src={portrait} alt={`代表社員 ${company.representative}`} class="portrait" />
+        <img src={portrait} alt={`代表社員 ${company.representative}`} class="portrait" data-reveal />
       ) : (
-        <div class="portrait placeholder">PORTRAIT 3:4（任意・後ろ姿や手元でも可）</div>
+        <div class="portrait placeholder" data-reveal>PORTRAIT 3:4（任意・後ろ姿や手元でも可）</div>
       )
     }
     <div>
-      <div class="role">代表社員</div>
-      <div class="name">
+      <div class="role" data-reveal>代表社員</div>
+      <div class="name" data-reveal>
         <span class="name-ja">{company.representative}</span>
         <span class="name-en en">{company.representativeEn}</span>
       </div>
-      <p class="bio">（自己紹介文）Webアプリケーションからインフラまで、ひとつのサービスを最初から最後まで自分の手で組み立てることを得意としています。</p>
-      <ul class="skills" aria-label="得意な技術">
+      <p class="bio" data-reveal>（自己紹介文）Webアプリケーションからインフラまで、ひとつのサービスを最初から最後まで自分の手で組み立てることを得意としています。</p>
+      <ul class="skills" data-reveal aria-label="得意な技術">
         {skills.map((s) => <li>{s}</li>)}
       </ul>
     </div>
@@ -36,13 +36,13 @@ const portrait: string | undefined = undefined;
     <Wave color="#fff" position="top" />
     <div class="split">
       <div>
-        <div class="eyebrow">CAREER</div>
-        <h2 class="section-title">経歴</h2>
+        <div class="eyebrow" data-reveal>CAREER</div>
+        <h2 class="section-title" data-reveal>経歴</h2>
       </div>
       <dl class="career">
         {
           career.map((c) => (
-            <div class="career-row">
+            <div class="career-row" data-reveal>
               <dt class="en">{c.date}</dt>
               <dd>{c.text}</dd>
             </div>

@@ -44,9 +44,9 @@ const hasMedia = Boolean(image || video);
   }
   {!hasMedia && note && <span class="note">{note}</span>}
   <div class="hero-text">
-    {en && <div class="eyebrow">{en}</div>}
+    {en && <div class="eyebrow" data-reveal>{en}</div>}
     {/* 改行などを入れたいときは、中身を slot で渡す */}
-    <h1>{Astro.slots.has('default') ? <slot /> : title}</h1>
+    <h1>{Astro.slots.has('default') ? <slot /> : <span class="hero-title" data-reveal style="--reveal-delay: 120ms">{title}</span>}</h1>
     {/* 見出しの下に添える文（英語のサブコピーなど） */}
     <slot name="sub" />
   </div>

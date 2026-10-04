@@ -8,9 +8,9 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
 
 <BaseLayout title="お問い合わせ" description="開発のご相談・お見積りはこちらのフォームからご連絡ください。" showCta={false}>
   <div class="head container">
-    <div class="eyebrow">CONTACT</div>
-    <h1>お問い合わせ</h1>
-    <p>開発のご相談・お見積りは、以下のフォームからご連絡ください。2営業日以内にご返信します。</p>
+    <div class="eyebrow" data-reveal>CONTACT</div>
+    <h1 data-reveal style="--reveal-delay: 100ms">お問い合わせ</h1>
+    <p data-reveal style="--reveal-delay: 200ms">開発のご相談・お見積りは、以下のフォームからご連絡ください。2営業日以内にご返信します。</p>
     <Wave color="#fff" />
   </div>
   <nav class="breadcrumb container" aria-label="パンくずリスト">
@@ -20,12 +20,12 @@ const topics = ['開発のご相談', 'お見積り', 'その他'];
   </nav>
 
   <section class="split container body">
-    <div class="mail">
+    <div class="mail" data-reveal>
       <div class="mail-title">メールでのご連絡</div>
       <a href={`mailto:${company.email}`}>{company.email}</a>
     </div>
 
-    <form class="form" method="post" action={contactFormEndpoint || undefined} data-endpoint={contactFormEndpoint}>
+    <form class="form" data-reveal method="post" action={contactFormEndpoint || undefined} data-endpoint={contactFormEndpoint}>
       <div class="row">
         <div class="label" id="topic-label">ご用件 <span class="req">必須</span></div>
         <div class="field radios" role="radiogroup" aria-labelledby="topic-label">

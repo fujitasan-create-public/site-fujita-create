@@ -12,10 +12,10 @@ const { waveColor } = Astro.props;
 <section class:list={['cta container', { 'has-wave': waveColor }]}>
   {waveColor && <Wave color={waveColor} position="top" />}
   <div>
-    <div class="eyebrow">CONTACT</div>
-    <p class="cta-title">開発のご相談・お見積り</p>
+    <div class="eyebrow" data-reveal>CONTACT</div>
+    <p class="cta-title" data-reveal style="--reveal-delay: 100ms">開発のご相談・お見積り</p>
   </div>
-  <a href="/contact/" class="cta-button">お問い合わせフォーム →</a>
+  <a href="/contact/" class="cta-button" data-reveal style="--reveal-delay: 200ms">お問い合わせフォーム →</a>
 </section>
 
 <style>

@@ -17,24 +17,24 @@ const valuesImage: string | undefined = undefined;
     breadcrumb={false}
     waveColor="var(--accent)"
   >
-    <span class="hero-line">新しい価値を</span>
-    <span class="hero-line hero-line-indent">創造する</span>
-    <p slot="sub" class="hero-en">Creating new value</p>
+    <span class="hero-line" data-reveal>新しい価値を</span>
+    <span class="hero-line hero-line-indent" data-reveal style="--reveal-delay: 200ms">創造する</span>
+    <p slot="sub" class="hero-en" data-reveal style="--reveal-delay: 400ms">Creating new value</p>
   </PageHero>
 
   <!-- オレンジ：想い（左に文字・右に写真） -->
   <section class="philosophy container">
     <div class="feature">
       <div class="feature-text">
-        <div class="eyebrow">PHILOSOPHY</div>
-        <h2 class="feature-title">想い</h2>
-        <p class="catch">本当に必要なものを、<br />誠実につくる。</p>
-        <p class="body">
+        <div class="eyebrow" data-reveal>PHILOSOPHY</div>
+        <h2 data-reveal class="feature-title">想い</h2>
+        <p class="catch" data-reveal>本当に必要なものを、<br />誠実につくる。</p>
+        <p class="body" data-reveal>
           プロダクトの価値は、<br />
           完成した日ではなく、<br />
           使われ続ける日々の中で生まれるものだと考えています。
         </p>
-        <p class="body">
+        <p class="body" data-reveal>
           当社はお客様の業務に、<br />
           真摯に向き合い、<br />
           本当に必要なものを見極め、<br />
@@ -46,6 +46,7 @@ const valuesImage: string | undefined = undefined;
         src="/images/philosophy.jpg"
         alt="オフィスでモニターに向かい、プログラムを書いている様子"
         class="feature-image"
+        data-reveal
         width="1051"
         height="1100"
         loading="lazy"
@@ -58,12 +59,12 @@ const valuesImage: string | undefined = undefined;
   <section class="values-section container">
     <div class="feature feature-reverse">
       <div class="feature-text">
-        <div class="eyebrow">VALUES</div>
-        <h2 class="feature-title feature-title-long">大切にしていること</h2>
+        <div class="eyebrow" data-reveal>VALUES</div>
+        <h2 data-reveal class="feature-title feature-title-long">大切にしていること</h2>
         <ol class="values">
           {
             values.map((v, i) => (
-              <li class="value">
+              <li class="value" data-reveal style={`--reveal-delay: ${i * 120}ms`}>
                 <span class="value-num en">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3>{v.title}</h3>
@@ -76,9 +77,9 @@ const valuesImage: string | undefined = undefined;
       </div>
       {
         valuesImage ? (
-          <img src={valuesImage} alt="" class="feature-image" loading="lazy" />
+          <img src={valuesImage} alt="" class="feature-image" loading="lazy" data-reveal />
         ) : (
-          <div class="feature-image placeholder">PHOTO（縦長 4:5 程度）</div>
+          <div class="feature-image placeholder" data-reveal>PHOTO（縦長 4:5 程度）</div>
         )
       }
     </div>
@@ -87,12 +88,12 @@ const valuesImage: string | undefined = undefined;
 
   <!-- オレンジ：事業内容 -->
   <section class="business container">
-    <div class="eyebrow">BUSINESS</div>
-    <h2 class="feature-title feature-title-long">事業内容</h2>
+    <div class="eyebrow" data-reveal>BUSINESS</div>
+    <h2 data-reveal class="feature-title feature-title-long">事業内容</h2>
     <ol class="business-list">
       {
         services.map((s, i) => (
-          <li>
+          <li data-reveal style={`--reveal-delay: ${i * 150}ms`}>
             <span class="business-num en">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="business-title">{s.title}</h3>
             <span class="business-en en">{s.en}</span>
