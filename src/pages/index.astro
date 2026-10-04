@@ -9,26 +9,32 @@ import { services, values } from '../data/site';
   <PageHero title="会社概要" en="ABOUT" note="PAGE VISUAL — 建築の細部（2560×720）" breadcrumb={false} waveColor="var(--accent)" />
 
   <section class="philosophy container">
-    <div class="split">
-    <div>
-      <div class="eyebrow">PHILOSOPHY</div>
-      <h2 class="section-title">想い</h2>
-    </div>
-    <div>
-      <p class="catch">本当に必要なものを、<br />誠実につくる。</p>
-      <p class="body">
-        プロダクトの価値は、<br />
-        完成した日ではなく、<br />
-        使われ続ける日々の中で生まれるものだと考えています。
-      </p>
-      <p class="body">
-        当社はお客様の業務に、<br />
-        真摯に向き合い、<br />
-        本当に必要なものを見極め、<br />
-        誠実なものづくりを通じて、<br />
-        長く信頼される製品をお届けしてまいります。
-      </p>
-    </div>
+    <div class="philosophy-inner">
+      <div>
+        <div class="eyebrow">PHILOSOPHY</div>
+        <h2 class="philosophy-title">想い</h2>
+        <p class="catch">本当に必要なものを、<br />誠実につくる。</p>
+        <p class="body">
+          プロダクトの価値は、<br />
+          完成した日ではなく、<br />
+          使われ続ける日々の中で生まれるものだと考えています。
+        </p>
+        <p class="body">
+          当社はお客様の業務に、<br />
+          真摯に向き合い、<br />
+          本当に必要なものを見極め、<br />
+          誠実なものづくりを通じて、<br />
+          長く信頼される製品をお届けしてまいります。
+        </p>
+      </div>
+      <img
+        src="/images/philosophy.jpg"
+        alt="オフィスでモニターに向かい、プログラムを書いている様子"
+        class="philosophy-image"
+        width="1051"
+        height="1100"
+        loading="lazy"
+      />
     </div>
     <Wave color="var(--accent-soft)" flip />
   </section>
@@ -90,11 +96,34 @@ import { services, values } from '../data/site';
     font-weight: 500;
   }
 
-  .catch {
-    margin-bottom: 48px;
-    font-size: 40px;
-    line-height: 1.6;
+  .philosophy-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--split-gap);
+    align-items: center;
+  }
+
+  .philosophy-title {
+    margin-bottom: 28px;
+    font-size: clamp(56px, 7.5vw, 104px);
     font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  .catch {
+    margin-bottom: 40px;
+    font-size: clamp(28px, 3.4vw, 46px);
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .philosophy-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1051 / 1100;
+    object-fit: cover;
+    border-radius: 24px;
   }
 
   .body {
@@ -185,6 +214,14 @@ import { services, values } from '../data/site';
   }
 
   @media (max-width: 900px) {
+    .philosophy-inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .philosophy-image {
+      max-width: 520px;
+    }
+
     .business-list li {
       grid-template-columns: 40px minmax(0, 1fr);
       gap: 8px 16px;
@@ -196,15 +233,20 @@ import { services, values } from '../data/site';
   }
 
   @media (max-width: 600px) {
-    .philosophy,
-    .values-section,
+    .philosophy {
+      padding-block: 48px 96px;
+    }
+
+    .values-section {
+      padding-block: 40px 96px;
+    }
+
     .business {
-      padding-block: 72px;
+      padding-block: 64px 72px;
     }
 
     .catch {
-      font-size: 26px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .body {
