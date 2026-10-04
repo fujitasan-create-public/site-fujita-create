@@ -6,8 +6,8 @@ export const company = {
   nameEn: 'FUJITA-CREATE LLC',
   copyright: 'Fujita-create LLC',
   email: 'info@fujita-create.com',
-  representative: '藤田 〇〇',
-  representativeEn: '〇〇 FUJITA',
+  representative: '藤田 香成',
+  representativeEn: 'KANARU FUJITA',
 };
 
 // フッターの会社情報（2列×4行で表示）
@@ -15,7 +15,7 @@ export const companyInfo: { label: string; value: string }[] = [
   { label: '商号', value: company.name },
   { label: '設立', value: '2026年10月' },
   { label: '所在地', value: '〒000-0000 東京都〇〇区〇〇 1-2-3' },
-  { label: '資本金', value: '〇〇万円' },
+  { label: '資本金', value: '500,000円' },
   { label: '代表社員', value: company.representative },
   { label: '事業年度', value: '4月1日〜翌年3月31日' },
   { label: '事業内容', value: 'Webアプリ・業務システム開発、インフラ構築' },
@@ -80,11 +80,11 @@ export const products: Product[] = [
 export const skills = ['TypeScript', 'React', 'Python', 'AWS', 'Docker'];
 
 export const career = [
-  { date: '20XX.04', text: '〇〇大学 〇〇学部 入学' },
+  { date: '20XX.04', text: '京都大学 入学' },
   { date: '20XX', text: '（学生時代の開発経験・インターン等）' },
   { date: '20XX', text: '個人でのWebアプリケーション開発を開始' },
   { date: '2026.10', text: '合同会社Fujita-create を設立、代表社員に就任' },
-  { date: '2027.03', text: '〇〇大学 〇〇学部 卒業（予定）' },
+  { date: '2027.03', text: '京都大学 卒業（予定）' },
 ];
 
 // お問い合わせフォームの送信先。
