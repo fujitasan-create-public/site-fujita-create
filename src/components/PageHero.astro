@@ -47,6 +47,8 @@ const hasMedia = Boolean(image || video);
     {en && <div class="eyebrow">{en}</div>}
     {/* 改行などを入れたいときは、中身を slot で渡す */}
     <h1>{Astro.slots.has('default') ? <slot /> : title}</h1>
+    {/* 見出しの下に添える文（英語のサブコピーなど） */}
+    <slot name="sub" />
   </div>
   <Wave color={waveColor} />
 </div>
@@ -83,7 +85,9 @@ const hasMedia = Boolean(image || video);
     min-height: 480px;
   }
 
+  /* 文字のかたまりを少し右に寄せる */
   .hero-large .hero-text {
+    left: clamp(20px, 9vw, 160px);
     bottom: calc(var(--wave-h) + clamp(48px, 8vw, 110px));
   }
 

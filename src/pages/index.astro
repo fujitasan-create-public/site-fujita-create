@@ -19,6 +19,7 @@ const valuesImage: string | undefined = undefined;
   >
     <span class="hero-line">新しい価値を</span>
     <span class="hero-line hero-line-indent">創造する</span>
+    <p slot="sub" class="hero-en">Creating new value</p>
   </PageHero>
 
   <!-- オレンジ：想い（左に文字・右に写真） -->
@@ -110,9 +111,17 @@ const valuesImage: string | undefined = undefined;
     display: block;
   }
 
-  /* 2 行目を字下げして、1 行目と行末をそろえる */
+  /* 2 行目は 4 文字分字下げ */
   .hero-line-indent {
-    padding-left: 2em;
+    padding-left: 4em;
+  }
+
+  .hero-en {
+    margin-top: clamp(16px, 2vw, 28px);
+    font: 600 clamp(14px, 1.6vw, 22px) var(--font-en);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* ---------- 共通：文字と写真の 2 列 ---------- */
