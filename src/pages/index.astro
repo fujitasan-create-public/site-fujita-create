@@ -96,8 +96,10 @@ const valuesImage: string | undefined = '/images/values.jpg';
 
   <!-- オレンジ：事業内容 -->
   <section class="business container">
-    <div class="eyebrow" data-reveal>BUSINESS</div>
-    <h2 data-reveal class="feature-title feature-title-long">事業内容</h2>
+    <div class="business-head">
+      <div class="eyebrow" data-reveal>BUSINESS</div>
+      <h2 data-reveal class="feature-title feature-title-long">事業内容</h2>
+    </div>
     <ol class="business-list">
       {
         services.map((s, i) => (
@@ -278,6 +280,20 @@ const valuesImage: string | undefined = '/images/values.jpg';
 
   .business .eyebrow {
     color: #fff;
+  }
+
+  /* 見出しを中央（02 の列の上）に置く */
+  .business-head {
+    text-align: center;
+  }
+
+  /* 字間の最後の 1 文字分の余りを打ち消し、見た目の中心をそろえる */
+  .business-head .eyebrow {
+    margin-right: -0.3em;
+  }
+
+  .business-head .feature-title {
+    margin-right: -0.02em;
   }
 
   /* 3 列に分けて、各列の中は上から番号・見出し・説明 */
