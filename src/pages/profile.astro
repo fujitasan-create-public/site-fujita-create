@@ -46,13 +46,17 @@ const portrait: string | undefined = undefined;
           {
             career.map((c, i) => (
               <li
-                class:list={['timeline-item', { 'is-future': c.text.includes('予定') }]}
+                class:list={['timeline-item', { 'is-future': c.future, 'is-highlight': c.highlight }]}
                 data-reveal
                 style={`--reveal-delay: ${300 + i * 180}ms`}
               >
                 <time class="timeline-date en">{c.date}</time>
                 <span class="timeline-dot" aria-hidden="true"></span>
-                <p class="timeline-text">{c.text}</p>
+                <div class="timeline-card">
+                  {c.tag && <span class="timeline-tag">{c.tag}</span>}
+                  <p class="timeline-title">{c.title}</p>
+                  {c.detail && <p class="timeline-detail">{c.detail}</p>}
+                </div>
               </li>
             ))
           }
@@ -162,7 +166,7 @@ const portrait: string | undefined = undefined;
 
   .timeline-list {
     display: grid;
-    gap: 28px;
+    gap: clamp(48px, 6vw, 80px);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -171,7 +175,13 @@ const portrait: string | undefined = undefined;
   .timeline-item {
     display: grid;
     grid-template-columns: var(--date-w) var(--rail-w) minmax(0, 1fr);
-    align-items: center;
+    align-items: start;
+  }
+
+  /* 日付・玉は、カードの 1 行目（見出し）の高さにそろえる */
+  .timeline-date,
+  .timeline-dot {
+    margin-top: 26px;
   }
 
   .timeline-date {
@@ -194,13 +204,57 @@ const portrait: string | undefined = undefined;
     box-shadow: 0 0 0 6px var(--bg-sub);
   }
 
-  .timeline-text {
-    padding: 20px 26px;
-    border-radius: 14px;
+  .timeline-card {
+    position: relative;
+    padding: 24px 30px;
+    border-radius: 16px;
     background: #fff;
-    font-size: 16px;
-    line-height: 1.8;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .timeline-title {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  .timeline-detail {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* 節目：大きめの玉とオレンジのカード */
+  .is-highlight .timeline-dot {
+    width: 24px;
+    height: 24px;
+    margin-top: 23px;
+  }
+
+  .is-highlight .timeline-card {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .is-highlight .timeline-detail {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .is-highlight .timeline-tag {
+    background: #fff;
   }
 
   /* これからの予定は、中抜きの玉と控えめな文字で */
@@ -209,11 +263,11 @@ const portrait: string | undefined = undefined;
   }
 
   .is-future .timeline-date,
-  .is-future .timeline-text {
+  .is-future .timeline-card {
     color: var(--muted);
   }
 
-  .is-future .timeline-text {
+  .is-future .timeline-card {
     background: transparent;
     border: 1px dashed var(--num);
   }
@@ -254,6 +308,12 @@ const portrait: string | undefined = undefined;
       grid-row: 1;
     }
 
+    .timeline-date,
+    .timeline-dot,
+    .is-highlight .timeline-dot {
+      margin-top: 0;
+    }
+
     .timeline-date {
       grid-column: 2;
       grid-row: 1;
@@ -261,11 +321,14 @@ const portrait: string | undefined = undefined;
       text-align: left;
     }
 
-    .timeline-text {
+    .timeline-card {
       grid-column: 2;
       margin-left: 12px;
-      padding: 16px 18px;
-      font-size: 15px;
+      padding: 18px 20px;
+    }
+
+    .timeline-detail {
+      font-size: 14px;
     }
   }
 </style>

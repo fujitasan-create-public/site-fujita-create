@@ -76,12 +76,41 @@ export const products: Product[] = [
 
 export const skills = ['TypeScript', 'React', 'Python', 'AWS', 'Docker'];
 
-export const career = [
-  { date: '20XX.04', text: '京都大学 入学' },
-  { date: '20XX', text: '（学生時代の開発経験・インターン等）' },
-  { date: '20XX', text: '個人でのWebアプリケーション開発を開始' },
-  { date: '2026.10', text: '合同会社Fujita-create を設立、代表社員に就任' },
-  { date: '2027.03', text: '京都大学 卒業（予定）' },
+// 経歴（代表者ページのタイムライン）
+// title：見出し / detail：補足（省略可） / tag：右上の小さなラベル（省略可）
+// highlight：オレンジで目立たせる節目 / future：これからの予定（中抜きの玉で表示）
+export type CareerItem = {
+  date: string;
+  title: string;
+  detail?: string;
+  tag?: string;
+  highlight?: boolean;
+  future?: boolean;
+};
+
+export const career: CareerItem[] = [
+  { date: '2003.05', title: '静岡県に生まれる' },
+  { date: '2022.03', title: '静岡県内の高等学校を卒業' },
+  { date: '2022.04', title: '京都大学に入学' },
+  {
+    date: '2023.10',
+    title: 'フリーランスとして受託開発を開始',
+    detail: 'クラウドワークス・ココナラなどを通じて個人のお客様からの開発案件を受託し、要件の整理から納品までを一人で担当。',
+  },
+  {
+    date: '2024.08',
+    title: '企業の開発プロジェクトに参画',
+    detail: '知人の紹介をきっかけに、初めて企業案件に参画。以降、複数社の開発プロジェクトに継続して携わる。',
+    tag: '現在も継続中',
+    highlight: true,
+  },
+  {
+    date: '2026.11',
+    title: '合同会社Fujita-create を設立',
+    detail: '代表社員に就任。これまでの経験を生かし、法人として開発の受託を開始。',
+    highlight: true,
+  },
+  { date: '2027.03', title: '京都大学を卒業（予定）', future: true },
 ];
 
 // お問い合わせフォームの送信先。
