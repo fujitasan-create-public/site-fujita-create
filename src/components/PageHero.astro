@@ -71,8 +71,20 @@ const hasMedia = Boolean(image || video);
     background-position: center;
   }
 
-  .hero-large {
-    height: clamp(520px, 82vh, 860px);
+  /*
+   * ヘッダーの下を動画で画面いっぱいにする。
+   * 下端の波（Wave と同じ高さ）は画面の外に出し、スクロールして初めて見えるようにする。
+   */
+  /* 画面幅ごとの .hero の高さ指定より優先させるため、2 つのクラスで指定 */
+  .hero.hero-large {
+    --wave-h: clamp(36px, 6vw, 96px);
+    height: calc(100vh - var(--header-h) + var(--wave-h));
+    height: calc(100svh - var(--header-h) + var(--wave-h));
+    min-height: 480px;
+  }
+
+  .hero-large .hero-text {
+    bottom: calc(var(--wave-h) + clamp(48px, 8vw, 110px));
   }
 
   .hero-large h1 {
@@ -150,10 +162,6 @@ const hasMedia = Boolean(image || video);
   @media (max-width: 600px) {
     .hero {
       height: 280px;
-    }
-
-    .hero-large {
-      height: clamp(440px, 70vh, 620px);
     }
 
     .note {
