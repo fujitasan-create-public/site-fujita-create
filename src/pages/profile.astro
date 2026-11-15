@@ -16,7 +16,10 @@ const portrait: string | undefined = undefined;
       portrait ? (
         <img src={portrait} alt={`代表社員 ${company.representative}`} class="portrait" data-reveal />
       ) : (
-        <div class="portrait placeholder" data-reveal>PORTRAIT 3:4（任意・後ろ姿や手元でも可）</div>
+        <div class="portrait portrait-pending" data-reveal>
+          <span class="pending-ja">準備中</span>
+          <span class="pending-en en">PHOTO COMING SOON</span>
+        </div>
       )
     }
     <div>
@@ -88,6 +91,32 @@ const portrait: string | undefined = undefined;
     max-height: 420px;
     object-fit: cover;
     padding: 14px;
+  }
+
+  /* 写真が用意できるまでの表示 */
+  .portrait-pending {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+  }
+
+  .pending-ja {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  .pending-en {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--muted);
   }
 
   img.portrait {

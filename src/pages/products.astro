@@ -24,10 +24,17 @@ import { products } from '../data/site';
             <div class="meta">
               <span class="kind">{p.kind}</span>
               <span class="cat en">{p.cat}</span>
-              <span class="year en">{p.year}</span>
+              <span class="year en">{p.period}</span>
             </div>
             <h3>{p.title}</h3>
             <p class="desc">{p.desc}</p>
+            {(p.challenge || p.approach || p.result) && (
+              <dl class="points">
+                {p.challenge && (<div><dt>課題</dt><dd>{p.challenge}</dd></div>)}
+                {p.approach && (<div><dt>取り組み</dt><dd>{p.approach}</dd></div>)}
+                {p.result && (<div class="is-result"><dt>成果</dt><dd>{p.result}</dd></div>)}
+              </dl>
+            )}
             <div class="stack">{p.stack}</div>
           </li>
         ))
@@ -108,6 +115,49 @@ import { products } from '../data/site';
     font-size: 14px;
     line-height: 1.9;
     color: var(--text-sub);
+  }
+
+  /* 課題・取り組み・成果 */
+  .points {
+    display: grid;
+    gap: 14px;
+    margin: 4px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .points div {
+    display: grid;
+    grid-template-columns: 4.5em minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+  }
+
+  .points dt {
+    padding: 2px 0;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .points dd {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-sub);
+  }
+
+  .points .is-result dt {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .points .is-result dd {
+    color: var(--ink);
+    font-weight: 700;
   }
 
   .stack {

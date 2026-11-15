@@ -61,18 +61,55 @@ export type ProductKind = '法人' | '個人';
 export type Product = {
   kind: ProductKind;
   cat: string;
-  year: string;
+  // 期間（例: '2025.04 – 現在'）
+  period: string;
   title: string;
+  // 概要（カードの最初に出る説明）
   desc: string;
+  // 課題・取り組み・成果（省略可）
+  challenge?: string;
+  approach?: string;
+  result?: string;
   stack: string;
   // public/ に置いた画像のパス（例: '/images/products/reserve.jpg'）。未設定ならプレースホルダー表示
   image?: string;
 };
 
+// 守秘義務のため、お客様の社名・チーム構成などは載せていません
 export const products: Product[] = [
-  { kind: '法人', cat: 'WEB APPLICATION', year: '2026', title: '〇〇業向け 予約管理システム', desc: '電話とFAXで受けていた予約をWebで一元管理。', stack: 'Next.js / PostgreSQL / AWS' },
-  { kind: '法人', cat: 'BUSINESS SYSTEM', year: '2026', title: '在庫・受発注業務のシステム化', desc: '表計算で管理していた在庫と発注を一つの画面に統合。', stack: 'React / Python / GCP' },
-  { kind: '法人', cat: 'INFRASTRUCTURE', year: '2026', title: 'オンプレミスからクラウドへの移行', desc: '社内サーバーをクラウドへ移行し、監視と自動バックアップを整備。', stack: 'AWS / Terraform / Docker' },
+  {
+    kind: '法人',
+    cat: 'BUSINESS SYSTEM',
+    period: '2025.04 – 現在',
+    title: '製造業向け業務システム マスタ登録機能の設計・開発',
+    desc: '製造業のお客様向け業務システムで、マスタ登録画面と登録・検査フローのUI・API設計から実装までを担当。チームのリードとして、新しいメンバーへのタスク分配や進捗管理も担いました。',
+    challenge: 'ご要望は「この資料をアプリに入れてほしい」という抽象的なもので、内容の異なる8つの資料から、開発できる要件を整理する必要がありました。',
+    approach: '資料を横断的に分析して共通項を抽出し、要件と開発タスクに落とし込み。お客様のレビューを経たうえで、基本設計から詳細設計、コア機能の実装まで一貫して主導しました。',
+    result: '使いにくかった箇所の改善が反映され、お客様から良好な評価をいただきました。',
+    stack: 'Next.js / Python / AWS / Terraform',
+  },
+  {
+    kind: '法人',
+    cat: 'INFRASTRUCTURE',
+    period: '2025.04 – 現在',
+    title: 'AWS開発環境のインフラコスト最適化',
+    desc: '同じ業務システムの開発で、開発環境のAWSインフラコストの見直しを主導しました。',
+    challenge: '開発環境のインフラコストがかさんでおり、最適化が求められていました。',
+    approach: 'VPCエンドポイントの整理、RDS構成の見直し、ECSサービスの稼働スケジューリングを組み合わせた施策を立案・実行しました。',
+    result: '月々のインフラコストを約180ドル削減しました。',
+    stack: 'AWS / Terraform',
+  },
+  {
+    kind: '法人',
+    cat: 'WEB APPLICATION',
+    period: '2024.08 – 2025.02',
+    title: '医療業界向け業務システムの新規開発',
+    desc: '新規プロダクトの立ち上げ期から参画し、技術選定とアーキテクチャ設計の提案、5名の開発チームの取りまとめを担当。フロントエンド・バックエンド双方の実装にも携わりました。',
+    challenge: '新しい組織での新規開発で、実務経験の浅いメンバーが多い中、開発の標準を整えながらチームを進める必要がありました。',
+    approach: 'チームの習熟度を踏まえてFastAPIを採用。層を分ける設計思想は保ちつつ、実装の複雑さを抑えたレイヤードアーキテクチャを提案し、設計方針と開発標準を整備しました。',
+    result: '経験の浅いメンバーでも迷わず開発できる環境を整え、アプリケーションを完成まで導きました。',
+    stack: 'Next.js / Python (FastAPI) / Vercel',
+  },
 ];
 
 export const skills = ['TypeScript', 'React', 'Python', 'AWS', 'Docker'];
