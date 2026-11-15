@@ -13,8 +13,9 @@ export const company = {
 // フッターの会社情報（2列×4行で表示）
 export const companyInfo: { label: string; value: string }[] = [
   { label: '商号', value: company.name },
-  { label: '設立', value: '2026年10月' },
-  { label: '所在地', value: '〒000-0000 東京都〇〇区〇〇 1-2-3' },
+  { label: '設立', value: '2026年11月' },
+  // \n の位置で改行して表示されます
+  { label: '所在地', value: '〒106-0032 東京都港区六本木2丁目1番19号\nS-Building 3階' },
   { label: '資本金', value: '500,000円' },
   { label: '代表社員', value: company.representative },
   { label: '事業年度', value: '4月1日〜翌年3月31日' },
@@ -105,7 +106,7 @@ export const career: CareerItem[] = [
     highlight: true,
   },
   {
-    date: '2026.10',
+    date: '2026.11',
     title: '合同会社Fujita-create を設立',
     detail: '代表社員に就任。これまでの経験を生かし、法人として開発の受託を開始。',
     highlight: true,
