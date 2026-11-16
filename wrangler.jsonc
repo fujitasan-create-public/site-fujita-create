@@ -1,0 +1,13 @@
+// Cloudflare Workers の設定（静的サイトとして公開する）
+// https://developers.cloudflare.com/workers/static-assets/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "site-fujita-create",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    // npm run build で作られるフォルダをそのまま公開する
+    "directory": "./dist",
+    // 存在しない URL では 404.html を返す
+    "not_found_handling": "404-page"
+  }
+}

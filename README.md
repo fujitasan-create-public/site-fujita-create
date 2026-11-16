@@ -32,3 +32,13 @@ Node.js 22.12 以上が必要です。
   - 代表者の写真: `src/pages/profile.astro` の `portrait`
 - お問い合わせフォームは、`src/data/site.ts` の `contactFormEndpoint` に Formspree などのフォーム送信サービスのURLを入れると動作します。
 - プライバシーポリシー（`src/pages/privacy.astro`）はたたき台です。公開前に内容を確認してください。
+
+## 公開（Cloudflare Workers）
+
+`wrangler.jsonc` の設定で、`dist/` を Cloudflare Workers の静的アセットとして公開します。
+
+- Cloudflare のダッシュボードでこのリポジトリを接続しておくと、`main` に Push するたびに自動でビルド・公開されます。
+  - ビルドコマンド：`npm run build`
+  - デプロイコマンド：`npx wrangler deploy`
+- 手元から公開する場合は `npm run deploy`（初回は `npx wrangler login` が必要）。
+- 公開 URL：https://site.fujita-create.com （Cloudflare の「カスタムドメイン」で設定）

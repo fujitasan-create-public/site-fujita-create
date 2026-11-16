@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ページが見つかりません" showCta={false}>
+  <section class="not-found container">
+    <div class="eyebrow">404 NOT FOUND</div>
+    <h1>ページが見つかりません</h1>
+    <p>お探しのページは、移動または削除された可能性があります。</p>
+    <a href="/">トップへ戻る</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: 140px;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text-sub);
+  }
+
+  a {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--accent);
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .not-found {
+      padding-block: 96px;
+    }
+  }
+</style>
