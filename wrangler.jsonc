@@ -4,6 +4,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "site-fujita-create",
   "compatibility_date": "2026-11-01",
+  // 公開ドメイン（DNS と SSL 証明書は Cloudflare が自動で設定する）
+  "routes": [{ "pattern": "site.fujita-create.com", "custom_domain": true }],
   "assets": {
     // npm run build で作られるフォルダをそのまま公開する
     "directory": "./dist",
